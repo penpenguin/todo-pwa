@@ -1,0 +1,48 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project: Offline Todo PWA
+
+A React-based Progressive Web App for task management with offline-first capabilities using WASM SQLite.
+
+## Commands
+
+- `npm run dev` - Start development server on http://localhost:5173
+- `npm run build` - Build for production (output in dist/)
+- `npm run test` - Run unit tests with Vitest
+- `npm run test:e2e` - Run E2E tests with Playwright
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
+
+## Architecture
+
+### Tech Stack
+- React 18 + TypeScript + Vite
+- WASM SQLite (sql.js) with localStorage fallback
+- Vite PWA Plugin for offline functionality
+- Radix UI for accessible components
+- Vitest + Playwright for testing
+
+### Key Components
+- `TodoContext` - Global state management using React Context
+- `db/database.ts` - SQLite wrapper functions with debounced writes
+- Service Worker auto-registered for offline caching
+- All data stored locally, no backend required
+
+### Database
+Data stored in localStorage (with SQLite fallback) with schema:
+- todos table with id, title, description, due_date, status, tags, timestamps
+- Status values: '未着手' | '進行中' | '完了'
+
+### Important Patterns
+- Automatic localStorage persistence for performance
+- Filter/sort preferences persisted to localStorage
+- Component state managed via TodoContext
+- All async operations have error handling
+
+## Development Notes
+- Bundle size must stay under 500KB
+- Lighthouse Performance score target: ≥90
+- PWA manifest and icons configured
+- GitHub Actions CI runs lint, test, build on PRs
