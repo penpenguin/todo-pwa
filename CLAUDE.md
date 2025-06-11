@@ -10,8 +10,11 @@ A React-based Progressive Web App for task management with offline-first capabil
 
 - `npm run dev` - Start development server on http://localhost:5173
 - `npm run build` - Build for production (output in dist/)
+- `npm run preview` - Preview production build
 - `npm run test` - Run unit tests with Vitest
+- `npm run test:ui` - Run unit tests with UI
 - `npm run test:e2e` - Run E2E tests with Playwright
+- `npm run test:e2e:headed` - Run E2E tests in headed mode
 - `npm run lint` - Run ESLint
 - `npm run format` - Format code with Prettier
 
@@ -46,3 +49,14 @@ Data stored in localStorage (with SQLite fallback) with schema:
 - Lighthouse Performance score target: ≥90
 - PWA manifest and icons configured
 - GitHub Actions CI runs lint, test, build on PRs
+
+## Testing
+- Unit tests use Vitest with React Testing Library
+- E2E tests use Playwright with Chrome
+- CI automatically runs all tests on push/PR
+- E2E tests in CI include system dependency installation
+
+## Common Issues
+- E2E test failures: Usually due to dialog overlay blocking clicks - use specific selectors
+- WASM loading: Ensure sql-wasm.wasm is in public directory
+- Build size: Monitor imports, use dynamic imports for large components

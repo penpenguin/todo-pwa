@@ -47,13 +47,18 @@ cd todo-pwa
 # Install dependencies
 npm install
 
+# Install Playwright browsers for E2E testing (optional)
+npx playwright install
+
 # Start development server
 npm run dev
 ```
 
+The app will be available at http://localhost:5173
+
 ### Available Scripts
 
-- `npm run dev` - Start development server
+- `npm run dev` - Start development server at http://localhost:5173
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm run test` - Run unit tests
@@ -104,15 +109,46 @@ CREATE TABLE todos (
 ### Running Tests
 
 ```bash
-# Unit tests
+# Unit tests with Vitest
 npm test
 
-# E2E tests
+# Unit tests in watch mode
+npm test -- --watch
+
+# Unit tests with UI
+npm run test:ui
+
+# E2E tests with Playwright
 npm run test:e2e
 
-# E2E tests with UI
+# E2E tests with UI (headed mode)
 npm run test:e2e:headed
 ```
+
+### E2E Testing
+
+E2E tests use Playwright and test the following scenarios:
+- Adding new tasks
+- Editing existing tasks
+- Completing/uncompleting tasks
+- Deleting tasks
+- Filtering by status
+- Offline functionality
+- Data export/import
+
+For local E2E testing, Playwright will automatically start the dev server.
+
+### CI/CD
+
+The project uses GitHub Actions for continuous integration:
+
+- **Linting**: ESLint checks on every push/PR
+- **Unit Tests**: Vitest tests with coverage
+- **E2E Tests**: Playwright tests on Ubuntu with Chrome
+- **Build**: Production build verification
+- **Bundle Size**: Automatic check to ensure build stays under 500KB
+
+Test results and artifacts are automatically uploaded for failed builds.
 
 ### Building for Production
 
@@ -120,7 +156,12 @@ npm run test:e2e:headed
 npm run build
 ```
 
-The build output will be in the `dist` directory.
+The build output will be in the `dist` directory. The build process:
+- Compiles TypeScript
+- Bundles and minifies code
+- Generates PWA assets
+- Copies WASM files
+- Creates service worker
 
 ## Deployment
 
@@ -141,6 +182,61 @@ Ensure your hosting service supports:
 - Chrome/Edge 90+
 - Firefox 89+
 - Safari 15+
+
+All browsers must support:
+- WebAssembly
+- Service Workers
+- IndexedDB/localStorage
+- ES2020+ features
+
+## Troubleshooting
+
+### E2E Tests Failing
+
+If E2E tests fail locally:
+
+```bash
+# Install system dependencies (Linux/WSL)
+sudo npx playwright install-deps
+
+# Or install specific browsers
+npx playwright install chromium
+```
+
+### WASM Loading Issues
+
+If you see WASM-related errors:
+1. Ensure your server serves `.wasm` files with `application/wasm` MIME type
+2. Check that `sql-wasm.wasm` is in the `public` directory
+3. Verify CORS headers if loading from a different domain
+
+### PWA Installation
+
+For PWA installation to work:
+1. Serve the app over HTTPS (or localhost)
+2. Ensure `manifest.json` is accessible
+3. Check browser DevTools > Application tab for PWA status
+
+### Build Size Exceeds Limit
+
+If the build exceeds 500KB:
+1. Check for unnecessary dependencies
+2. Use dynamic imports for large components
+3. Ensure tree-shaking is working properly
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+All PRs must pass:
+- ESLint checks
+- Unit tests
+- E2E tests
+- Build size check (<500KB)
 
 ## License
 
