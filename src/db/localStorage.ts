@@ -74,7 +74,7 @@ export async function deleteTodoLocal(id: number): Promise<void> {
 }
 
 export async function listTodosLocal(filters?: {
-  status?: TodoStatus | 'all';
+  status?: TodoStatus | 'all' | 'active';
   tag?: string;
   sortBy?: 'dueDate' | 'createdAt' | 'title';
   sortOrder?: 'asc' | 'desc';
@@ -85,7 +85,11 @@ export async function listTodosLocal(filters?: {
   
   // Filter by status
   if (filters?.status && filters.status !== 'all') {
-    result = result.filter(todo => todo.status === filters.status);
+    if (filters.status === 'active') {
+      result = result.filter(todo => todo.status !== '完了');
+    } else {
+      result = result.filter(todo => todo.status === filters.status);
+    }
   }
   
   // Filter by tag

@@ -6,7 +6,7 @@ export function FilterBar() {
   const { filters, setFilters } = useTodos();
 
   const handleStatusChange = (value: string) => {
-    setFilters({ ...filters, status: value as TodoStatus | 'all' });
+    setFilters({ ...filters, status: value as TodoStatus | 'all' | 'active' });
   };
 
   const handleSortChange = (value: string) => {
@@ -20,7 +20,7 @@ export function FilterBar() {
 
   return (
     <div className="filter-bar">
-      <Select.Root value={filters.status || 'all'} onValueChange={handleStatusChange}>
+      <Select.Root value={filters.status || 'active'} onValueChange={handleStatusChange}>
         <Select.Trigger className="select-trigger">
           <Select.Value />
           <Select.Icon className="select-icon">▼</Select.Icon>
@@ -28,6 +28,9 @@ export function FilterBar() {
         <Select.Portal>
           <Select.Content className="select-content">
             <Select.Viewport>
+              <Select.Item value="active" className="select-item">
+                <Select.ItemText>Active Tasks</Select.ItemText>
+              </Select.Item>
               <Select.Item value="all" className="select-item">
                 <Select.ItemText>All Tasks</Select.ItemText>
               </Select.Item>

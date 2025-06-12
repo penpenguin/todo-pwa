@@ -12,7 +12,7 @@ export interface Todo {
 }
 
 export interface FilterOptions {
-  status?: TodoStatus | 'all';
+  status?: TodoStatus | 'all' | 'active';
   sortBy?: 'dueDate' | 'createdAt' | 'title';
   sortOrder?: 'asc' | 'desc';
   tag?: string;

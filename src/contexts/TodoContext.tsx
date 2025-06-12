@@ -7,7 +7,7 @@ import { TodoContext } from './todoContext';
 export function TodoProvider({ children }: { children: ReactNode }) {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filters, setFilters] = useState<FilterOptions>({
-    status: 'all',
+    status: 'active',
     sortBy: 'dueDate',
     sortOrder: 'asc'
   });
@@ -17,7 +17,7 @@ export function TodoProvider({ children }: { children: ReactNode }) {
   const refreshTodos = useCallback(async () => {
     try {
       const todoList = await listTodos({
-        status: filters.status as TodoStatus | 'all',
+        status: filters.status as TodoStatus | 'all' | 'active',
         tag: filters.tag,
         sortBy: filters.sortBy,
         sortOrder: filters.sortOrder
@@ -39,7 +39,7 @@ export function TodoProvider({ children }: { children: ReactNode }) {
         }
         // Initial load of todos
         const todoList = await listTodos({
-          status: savedFilters ? JSON.parse(savedFilters).status : 'all',
+          status: savedFilters ? JSON.parse(savedFilters).status : 'active',
           tag: savedFilters ? JSON.parse(savedFilters).tag : undefined,
           sortBy: savedFilters ? JSON.parse(savedFilters).sortBy : 'dueDate',
           sortOrder: savedFilters ? JSON.parse(savedFilters).sortOrder : 'asc'

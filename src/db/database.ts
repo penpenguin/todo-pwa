@@ -42,7 +42,7 @@ export async function deleteTodo(id: number): Promise<void> {
 }
 
 export async function listTodos(filters?: {
-  status?: TodoStatus | 'all';
+  status?: TodoStatus | 'all' | 'active';
   tag?: string;
   sortBy?: 'dueDate' | 'createdAt' | 'title';
   sortOrder?: 'asc' | 'desc';
