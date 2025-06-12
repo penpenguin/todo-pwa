@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import type { Todo, TodoStatus } from '../types/todo';
 import { useTodos } from '../contexts/useTodos';
@@ -12,12 +12,24 @@ interface AddTaskDialogProps {
 
 export function AddTaskDialog({ open, onOpenChange, editTodo }: AddTaskDialogProps) {
   const { addNewTodo, updateExistingTodo } = useTodos();
-  const [title, setTitle] = useState(editTodo?.title || '');
-  const [description, setDescription] = useState(editTodo?.description || '');
-  const [dueDate, setDueDate] = useState(editTodo?.dueDate || '');
-  const [status, setStatus] = useState<TodoStatus>(editTodo?.status || '未着手');
-  const [tags, setTags] = useState(editTodo?.tags || '');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [status, setStatus] = useState<TodoStatus>('未着手');
+  const [tags, setTags] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (editTodo) {
+      setTitle(editTodo.title || '');
+      setDescription(editTodo.description || '');
+      setDueDate(editTodo.dueDate || '');
+      setStatus(editTodo.status || '未着手');
+      setTags(editTodo.tags || '');
+    } else {
+      resetForm();
+    }
+  }, [editTodo]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
