@@ -57,3 +57,14 @@ Data stored in localStorage (with SQLite fallback) with schema:
 ## Common Issues
 - E2E test failures: Usually due to dialog overlay blocking clicks - use specific selectors
 - WASM loading: Ensure sql-wasm.wasm is in public directory
+
+## Commit Convention
+Commit messages must follow this format:
+- Summary: `action: #issue message`
+- Action types: `fix:`, `feat:`, `chore:`, `test:`, `docs:`, `style:`, `refactor:`, `perf:`, `build:`, `ci:`
+- Examples:
+  - `fix: #5 カレンダーと矢印アイコンにポインターカーソルを設定`
+  - `feat: #12 add export to CSV functionality`
+  - `chore: #8 update dependencies`
+- Use the existing git account configuration (no changes to git config)
+- Keep messages concise and descriptive
