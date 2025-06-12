@@ -134,7 +134,7 @@ export async function listTodosLocal(filters?: {
 
 export async function exportDatabaseLocal(): Promise<string> {
   loadFromStorage();
-  return JSON.stringify({ todos: storage.todos, version: 1 }, null, 2);
+  return JSON.stringify({ todos: storage.todos, version: 1 });
 }
 
 export async function importDatabaseLocal(jsonData: string, mode: 'merge' | 'replace' = 'merge'): Promise<void> {
