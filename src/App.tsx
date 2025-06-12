@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { TodoProvider } from './contexts/TodoContext';
 import { TodoList } from './components/TodoList';
 import { FilterBar } from './components/FilterBar';
-import { ExportImport } from './components/ExportImport';
+import { AppMenu } from './components/AppMenu';
 import { AddTaskDialog } from './components/AddTaskDialog';
 import './App.css';
 
@@ -14,22 +14,21 @@ function App() {
       <div className="app">
         <header className="app-header">
           <h1>Offline Todo PWA</h1>
-          <button
-            className="btn btn-primary"
-            onClick={() => setIsAddDialogOpen(true)}
-          >
-            Add Task
-          </button>
+          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+            <button
+              className="btn btn-primary"
+              onClick={() => setIsAddDialogOpen(true)}
+            >
+              Add Task
+            </button>
+            <AppMenu />
+          </div>
         </header>
 
         <main className="app-main">
           <FilterBar />
           <TodoList />
         </main>
-
-        <footer className="app-footer">
-          <ExportImport />
-        </footer>
 
         <AddTaskDialog
           open={isAddDialogOpen}
