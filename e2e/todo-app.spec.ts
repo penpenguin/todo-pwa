@@ -85,6 +85,10 @@ test.describe('Todo PWA', () => {
     // Click checkbox
     await page.click('.checkbox');
 
+    // Switch to "All Tasks" filter to see completed tasks
+    await page.click('.select-trigger');
+    await page.click('.select-item:has-text("All Tasks")');
+
     // Verify completed state
     await expect(page.locator('.todo-item')).toHaveClass(/completed/);
   });
@@ -155,6 +159,11 @@ test.describe('Todo PWA', () => {
     // Verify we can still interact with todos offline
     const checkboxes = page.locator('.checkbox');
     await checkboxes.first().click();
+    
+    // Switch to "All Tasks" filter to see completed tasks
+    await page.click('.select-trigger');
+    await page.click('.select-item:has-text("All Tasks")');
+    
     await expect(page.locator('.todo-item').first()).toHaveClass(/completed/);
 
     // Go back online for other tests
