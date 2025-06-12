@@ -118,6 +118,7 @@
 .select-icon {
   font-size: 0.75rem;
   color: #64748b;
+  cursor: pointer;
 }
 
 .select-content {
@@ -241,6 +242,7 @@
   background-color: #f1f5f9;
   border-radius: 0.25rem;
   color: #475569;
+  cursor: pointer;
 }
 
 .due-date.overdue {
