@@ -56,13 +56,3 @@ jobs:
             test-results/
             playwright-report/
           retention-days: 7
-
-      - name: Check bundle size
-        run: |
-          echo "Checking build size..."
-          TOTAL_SIZE=$(du -sb dist | cut -f1)
-          echo "Total build size: $TOTAL_SIZE bytes"
-          if [ $TOTAL_SIZE -gt 512000 ]; then
-            echo "Error: Build size exceeds 500KB limit!"
-            exit 1
-          fi

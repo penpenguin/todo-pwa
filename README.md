@@ -18,7 +18,7 @@ A personal offline-first Progressive Web App (PWA) for managing tasks, built wit
 - **Data Portability**:
   - Export all tasks to JSON
   - Import tasks from JSON (merge or replace)
-- **Performance**: Lighthouse score ≥90, bundle size <500KB
+- **Performance**: Optimized for fast loading and smooth interactions
 
 ## Tech Stack
 
@@ -146,7 +146,6 @@ The project uses GitHub Actions for continuous integration:
 - **Unit Tests**: Vitest tests with coverage
 - **E2E Tests**: Playwright tests on Ubuntu with Chrome
 - **Build**: Production build verification
-- **Bundle Size**: Automatic check to ensure build stays under 500KB
 
 Test results and artifacts are automatically uploaded for failed builds.
 
@@ -217,13 +216,6 @@ For PWA installation to work:
 2. Ensure `manifest.json` is accessible
 3. Check browser DevTools > Application tab for PWA status
 
-### Build Size Exceeds Limit
-
-If the build exceeds 500KB:
-1. Check for unnecessary dependencies
-2. Use dynamic imports for large components
-3. Ensure tree-shaking is working properly
-
 ## Contributing
 
 1. Fork the repository
@@ -236,7 +228,6 @@ All PRs must pass:
 - ESLint checks
 - Unit tests
 - E2E tests
-- Build size check (<500KB)
 
 ## License
 

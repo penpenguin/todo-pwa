@@ -1,6 +1,6 @@
 import * as Checkbox from '@radix-ui/react-checkbox';
 import type { Todo } from '../types/todo';
-import { useTodos } from '../contexts/TodoContext';
+import { useTodos } from '../contexts/useTodos';
 import { format, isPast, isToday, isTomorrow, parseISO } from 'date-fns';
 
 interface TodoItemProps {

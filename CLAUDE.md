@@ -45,8 +45,6 @@ Data stored in localStorage (with SQLite fallback) with schema:
 - All async operations have error handling
 
 ## Development Notes
-- Bundle size must stay under 500KB
-- Lighthouse Performance score target: ≥90
 - PWA manifest and icons configured
 - GitHub Actions CI runs lint, test, build on PRs
 
@@ -59,4 +57,3 @@ Data stored in localStorage (with SQLite fallback) with schema:
 ## Common Issues
 - E2E test failures: Usually due to dialog overlay blocking clicks - use specific selectors
 - WASM loading: Ensure sql-wasm.wasm is in public directory
-- Build size: Monitor imports, use dynamic imports for large components

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import type { Todo, TodoStatus } from '../types/todo';
-import { useTodos } from '../contexts/TodoContext';
+import { useTodos } from '../contexts/useTodos';
 import { format } from 'date-fns';
 
 interface AddTaskDialogProps {
