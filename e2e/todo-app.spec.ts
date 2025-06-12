@@ -178,8 +178,11 @@ test.describe('Todo PWA', () => {
     await page.waitForSelector('.dialog-overlay', { state: 'detached' });
 
     // Export data
+    // Open menu first
+    await page.click('button[aria-label="Open menu"]');
+    
     const downloadPromise = page.waitForEvent('download');
-    await page.click('button:has-text("Export Data")');
+    await page.getByText('Export Data').click();
     const download = await downloadPromise;
 
     // Verify download
