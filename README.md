@@ -164,17 +164,34 @@ The build output will be in the `dist` directory. The build process:
 
 ## Deployment
 
-The app can be deployed to any static hosting service:
+### GitHub Pages (Automatic)
+
+The app automatically deploys to GitHub Pages when changes are pushed to the `main` branch:
+
+1. The CI/CD workflow runs tests, linting, and builds the app
+2. If all checks pass, the build artifacts are deployed to GitHub Pages
+3. The app will be available at `https://penpenguin.github.io/todo-pwa/`
+
+### Manual Deployment
+
+The app can also be deployed to any static hosting service:
 
 - Netlify
 - Vercel
-- GitHub Pages
+- GitHub Pages (manual)
 - AWS S3 + CloudFront
 
 Ensure your hosting service supports:
 - HTTPS (required for Service Workers)
 - Proper MIME types for .wasm files
 - Cache headers for optimal performance
+
+For manual deployment, build the app and upload the `dist` folder:
+
+```bash
+npm run build
+# Upload contents of dist/ folder to your hosting service
+```
 
 ## Browser Support
 
